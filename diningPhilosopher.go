@@ -5,6 +5,7 @@ import (
 	"sync"
 	"time"
 )
+
 // These constants can be changed, so the problem is scalable.
 const (
 	noP             = 5 //number of Philosophers
@@ -79,7 +80,7 @@ func (h *Host) coordinate(wg *sync.WaitGroup) {
 func (h *Host) letThemEat() {
 	for id, pStatus := range h.PStatus {
 		// if P is not eating, and he didn't reach his max courses, and number of people eating at the same time is less than limit
-		if !pStatus.eating && pStatus.courses > 0 && h.noEating <= noPEatAtOneTime {
+		if pStatus.courses > 0 && !pStatus.eating && h.noEating <= noPEatAtOneTime {
 			// check left and right are not eating
 			lId := (id - 2 + noP) % noP
 			rId := id % noP
@@ -100,14 +101,13 @@ func main() {
 		cs[i] = new(Chopstick)
 	}
 
-
 	done := make(chan int)
 	p := make([]*Philosopher, noP)
 	status := make(map[int]Status)
 	for i := 0; i < noP; i++ {
 		permissionFromHost := make(chan bool)
 		p[i] = &Philosopher{
-			id:                i+1,
+			id:                i + 1,
 			leftCS:            cs[i],
 			rightCS:           cs[(i+1)%noP],
 			permission:        permissionFromHost,
