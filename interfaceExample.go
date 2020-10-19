@@ -48,17 +48,29 @@ func (t triangle) perim() float64 {
 	return math.Sqrt(s * (s - t.a) * (s - t.b) * (s - t.c))
 }
 
-func measure(g geometry, i string) {
+func measure(g geometry, s string) {
 	switch shape := g.(type) {
 	case circle:
-		shape.area()
-		shape.perim()
+		switch s {
+		case "area":
+			fmt.Printf("%0.3f\n",shape.area())
+		case "perimeter":
+			fmt.Printf("%0.3f\n",shape.perim())
+		}
 	case rectangle:
-		shape.area()
-		shape.perim()
+		switch s {
+		case "area":
+			fmt.Printf("%0.3f\n",shape.area())
+		case "perimeter":
+			fmt.Printf("%0.3f\n",shape.perim())
+		}
 	case triangle:
-		shape.area()
-		shape.perim()
+		switch s {
+		case "area":
+			fmt.Printf("%0.3f\n",shape.area())
+		case "perimeter":
+			fmt.Printf("%0.3f\n",shape.perim())
+		}
 	}
 }
 
@@ -93,8 +105,10 @@ func main() {
 			c, _ := strconv.ParseFloat(slice[2], 64)
 			g = triangle{a, b, c}
 		}
-		fmt.Printf("Area      : %0.3f\n", g.area())
-		fmt.Printf("Perimeter : %0.3f\n", g.perim())
+		fmt.Printf("requested method: ")
+		scanner.Scan()
+		s := scanner.Text()
+		measure(g,s)
 		fmt.Printf("> ")
 	}
 }
