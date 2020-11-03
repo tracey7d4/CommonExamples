@@ -10,11 +10,11 @@ import (
 )
 
 func quickSort(arr []int32) []int32 {
-	sort(arr, 0, int32(len(arr))-1)
+	sortArr(arr, 0, int32(len(arr))-1)
 	return arr
 }
 
-func sort(arr []int32, left, right int32) {
+func sortArr(arr []int32, left, right int32) {
 	//n := int32(len(arr))
 	start := left
 	stop := right
@@ -37,8 +37,8 @@ func sort(arr []int32, left, right int32) {
 		}
 	}
 	i, j := start-1, stop+1
-	sort(arr, left, i)
-	sort(arr, j, right)
+	sortArr(arr, left, i)
+	sortArr(arr, j, right)
 }
 
 func main() {
