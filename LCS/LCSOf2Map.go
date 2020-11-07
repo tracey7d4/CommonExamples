@@ -6,25 +6,25 @@ import (
 
 func LCSof2Map(arr1, arr2 []int32) int {
 	n := len(arr1)
-	k := len(arr2)
-	m := make(map[[2]int]int)
-	return LCSof2(arr1, arr2, n, k, m)
+	m := len(arr2)
+	mapOf2 := make(map[[2]int]int)
+	return LCSof2(arr1, arr2, n, m, mapOf2)
 }
 
-func LCSof2(arr1, arr2 []int32, n, k int, m map[[2]int]int) int {
-	if n == 0 || k == 0 {
+func LCSof2(arr1, arr2 []int32, n, m int, mapOf2 map[[2]int]int) int {
+	if n == 0 || m == 0 {
 		return 0
 	}
-	if _, ok := m[[2]int{n, k}]; ok {
-		return m[[2]int{n, k}]
+	if _, ok := mapOf2[[2]int{n, m}]; ok {
+		return mapOf2[[2]int{n, m}]
 	}
-	if arr1[n-1] == arr2[k-1]  {
-		res := 1 + LCSof2(arr1, arr2, n-1, k-1, m)
-		m[[2]int{n, k}] = res
+	if arr1[n-1] == arr2[m-1]  {
+		res := 1 + LCSof2(arr1, arr2, n-1, m-1, mapOf2)
+		mapOf2[[2]int{n, m}] = res
 		return res
 	}
-	res := maxOf2(LCSof2(arr1, arr2, n-1, k, m), LCSof2(arr1, arr2, n, k-1,m))
-	m[[2]int{n, k}] = res
+	res := maxOf2(LCSof2(arr1, arr2, n-1, m, mapOf2), LCSof2(arr1, arr2, n, m-1, mapOf2))
+	mapOf2[[2]int{n, m}] = res
 	return res
 }
 

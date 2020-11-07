@@ -34,8 +34,8 @@ func maxab(a,b int) int {
 }
 
 func main() {
-	arr1 := []int32{1, 2, 3}
-	arr2 := []int32{2, 1, 3}
+	arr1 := []int32{11, 12, 13}
+	arr2 := []int32{11, 13, 15}
 
 	fmt.Println(LCSof2Table(arr1, arr2))
 }
