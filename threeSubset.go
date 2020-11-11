@@ -8,10 +8,10 @@ import (
 func main() {
 	arr := []int{1, 1, 2, 2, 3, 3}
 
-	fmt.Println(partitionSouvenirs(arr))
+	fmt.Println(partitionArray(arr))
 }
 
-func partitionSouvenirs(arr []int) int {
+func partitionArray(arr []int) int {
 	n := len(arr)
 	sum := 0
 	for _, v := range arr {
