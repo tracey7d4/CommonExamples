@@ -6,9 +6,10 @@ import (
 )
 
 func main() {
-	arr := []int{1, 1, 2, 2, 3, 3}
-
-	fmt.Println(partitionArray(arr))
+	fmt.Println(partitionArray([]int{1, 1, 2, 2, 3, 3}))
+	fmt.Println(partitionArray([]int{1, 1, 4}))
+	fmt.Println(partitionArray([]int{0, 0, 0}))
+	fmt.Println(partitionArray([]int{1, 2, 3, 4, 5, 5, 7, 7, 8, 10, 12, 19, 25}))
 }
 
 func partitionArray(arr []int) bool {
