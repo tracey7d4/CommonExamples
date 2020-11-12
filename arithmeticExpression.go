@@ -3,30 +3,14 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"math"
-	"os"
-	"strconv"
-	"strings"
 )
 
 func main() {
-	scanner := bufio.NewScanner(os.Stdin)
-	scanner.Scan()
-	s := scanner.Text()
-	data := strings.Split(s, "")
-	n := len(data)
-	digit := make([]int64, 0, n/2+1)
-	op := make([]string, 0, n/2)
-	for i := 0; i < n; i++ {
-		if i%2 == 0 {
-			d, _ := strconv.ParseInt(data[i], 10, 32)
-			digit = append(digit, d)
-		} else {
-			op = append(op, data[i])
-		}
-	}
+	// example: 5-8+7*4-8+9
+	digit := []int64{5, 8, 7, 4, 8, 9}
+	op := []string{"-", "+", "*", "-", "+"}
 	fmt.Println(getMaxValue(digit, op))
 }
 
@@ -50,10 +34,10 @@ func getMaxValue(digit []int64, op []string) int64 {
 	return maximum[0][n-1]
 }
 
-func newMatrix(n int) [][]int64{
-	m := make([][]int64,n)
+func newMatrix(n int) [][]int64 {
+	m := make([][]int64, n)
 	for i, _ := range m {
-		m[i] = make([]int64,n)
+		m[i] = make([]int64, n)
 	}
 	return m
 }
