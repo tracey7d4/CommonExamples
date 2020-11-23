@@ -25,7 +25,8 @@ func (m *maxHeap) swap(i, j int32) {
 	m.value[i], m.value[j] = m.value[j], m.value[i]
 }
 
-func (m *maxHeap) buildMaxHeap(size int32) {
+func (m *maxHeap) buildMaxHeap() {
+	size := int32(len(m.value))
 	for i := size/2 - 1; i >= 0; i-- {
 		m.siftDown(i, size)
 	}
@@ -50,29 +51,22 @@ func (m *maxHeap) siftDown(index, size int32) {
 	}
 }
 
-//func (m *maxHeap) heapSort(size int32) {
-//	m.buildMaxHeap(size)
-//	if size > 1 {
-//		m.swap(0, size-1)
-//		m.heapSort(size - 1)
-//	}
-//
-//}
-func (m *maxHeap) heapSort(size int32) {
-	m.buildMaxHeap(size)
-	for i := size - 1; i > 1; i-- {
-		m.swap(0, size-1)
+func (m *maxHeap) heapSort() {
+	m.buildMaxHeap()
+	size := int32(len(m.value))
+	for i := size - 1; i > 0; i-- {
+		m.swap(0, i)
 		m.siftDown(0, i)
 	}
 
 }
 
 func main() {
-	arr := []int32{4, 1, 3, 2, 16, 9, 10, 14, 8, 7}
+	arr := []int32{4, 1, 3, 2, 16, 9, 10, 14, 8, 7, 1, 5, 7}
 	m := new(maxHeap)
 	for _, v := range arr {
 		m.value = append(m.value, v)
 	}
-	m.heapSort(int32(len(arr)))
+	m.heapSort()
 	fmt.Println(m.value)
 }
