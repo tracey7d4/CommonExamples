@@ -20,8 +20,10 @@ func main() {
 	buf := make([]byte, maxCapacity)
 	scanner.Buffer(buf, maxCapacity)
 	scanner.Scan()
+	// number of nodes in the tree
 	n, _ := strconv.ParseInt(scanner.Text(), 10, 64)
 	arr := make([]node, n)
+	// make tree
 	for i := int64(0); i < n; i++ {
 		scanner.Scan()
 		data := strings.Split(scanner.Text(), " ")
@@ -103,9 +105,8 @@ func preOrderTraversal(arr []node) []string {
 	s.push(arr[0])
 	answer := make([]string,0, len(arr))
 	for !s.isEmpty() {
-		c := s.peek()
+		c := s.pop()
 		answer = append(answer,c.key)
-		s.pop()
 		if c.right != nil {
 			s.push(*c.right)
 		}
@@ -122,9 +123,9 @@ func postOrderTraversal(arr []node) []string {
 	s.push(arr[0])
 
 	for !s.isEmpty() {
-		c := s.peek()
-		s1.push(c)
-		s.pop()
+		c := s.pop()
+		s1.push(*c)
+
 		if c.left != nil {
 			s.push(*c.left)
 		}
@@ -159,6 +160,7 @@ func (q * queue) pop() node {
 	*q = (*q)[1:]
 	return res
 }
+//----------------------------------------------------------------
 
 func bfs(arr []node) []string {
 	q := newQueue()
