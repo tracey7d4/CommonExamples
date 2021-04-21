@@ -1,5 +1,3 @@
-// idea taken from Hackerrank https://www.hackerrank.com/challenges/primsmstsub/problem
-
 package main
 
 import (
