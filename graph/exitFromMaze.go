@@ -14,8 +14,8 @@ import (
 // Output: output YES if there is a path, and NO otherwise
 
 type vertex struct {
-	children map[int]*vertex
-	flag	bool
+	adjacent map[int]*vertex
+	flag     bool
 }
 
 func newVertex() *vertex{
@@ -43,16 +43,17 @@ func main() {
 	for i := 0; i < int(m); i++ {
 		scanner.Scan()
 		data := strings.Split(scanner.Text(), " ")
-		j, _ := strconv.ParseInt(data[0], 10, 64)
-		k, _ := strconv.ParseInt(data[1], 10, 64)
-		graph[j-1].children[int(k)-1] = graph[k-1]
-		graph[k-1].children[int(j)-1] = graph[j-1]
+		u, _ := strconv.ParseInt(data[0], 10, 64)
+		v, _ := strconv.ParseInt(data[1], 10, 64)
+		graph[u-1].adjacent[int(v)-1] = graph[v-1]
+		graph[v-1].adjacent[int(u)-1] = graph[u-1]
 	}
+
 	scanner.Scan()
 	data := strings.Split(scanner.Text(), " ")
-	j, _ := strconv.ParseInt(data[0], 10, 64)
-	k, _ := strconv.ParseInt(data[1], 10, 64)
-	isConnected(graph, int(j)-1, int(k)-1)
+	u, _ := strconv.ParseInt(data[0], 10, 64)
+	v, _ := strconv.ParseInt(data[1], 10, 64)
+	isConnected(graph, int(u)-1, int(v)-1)
 }
 
 func isConnected(node []*vertex, j, k int) {
@@ -61,7 +62,7 @@ func isConnected(node []*vertex, j, k int) {
 	node[j].flag = true
 	for !q.isEmpty() {
 		s := q.pop()
-		for key, value := range s.children {
+		for key, value := range s.adjacent {
 			if key == k {
 				fmt.Println("YES")
 				return
