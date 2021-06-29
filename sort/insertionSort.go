@@ -7,14 +7,9 @@ func insertionSort(arr []int32) []int32 {
 	n := len(arr)
 	for i := 1; i < n; i++ {
 		j := i
-		swapped := false
-		for !swapped && j >= 1 {
-			swapped = true
-			if arr[j] < arr[j-1] {
-				arr[j], arr[j-1] = arr[j-1], arr[j]
-				j--
-				swapped = false
-			}
+		for j >= 1 && arr[j] < arr[j-1] {
+			arr[j], arr[j-1] = arr[j-1], arr[j]
+			j--
 		}
 	}
 	return arr

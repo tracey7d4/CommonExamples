@@ -33,5 +33,4 @@ func countingSort(arr []int32) []int32 {
 		countArr[v]--
 	}
 	return res
-
 }
